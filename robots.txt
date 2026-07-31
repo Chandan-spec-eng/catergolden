@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://catergolden.com/sitemap.xml
