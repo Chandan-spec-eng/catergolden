@@ -34,18 +34,52 @@ window.addEventListener("scroll", () => {
 
 });
 
-// Quote Form
+// ===============================
+// Quote Form → Google Sheet
+// ===============================
+
 const form = document.querySelector(".quote-form");
 
 if (form) {
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
-    alert("Thank you for contacting CATERGOLDEN SERVICES LLP. We will contact you shortly.");
+    const data = {
+      name: form.querySelector('input[placeholder="Your Name"]').value,
+      company: form.querySelector('input[placeholder="Company Name"]').value,
+      mobile: form.querySelector('input[placeholder="Mobile Number"]').value,
+      email: form.querySelector('input[placeholder="Email Address"]').value,
+      guests: form.querySelector('input[placeholder="Number of Guests"]').value,
+      message: form.querySelector("textarea").value
+    };
 
-    form.reset();
+    try {
+
+      await fetch("https://script.google.com/macros/s/AKfycbw70goKhFv08A1OAa25qNNCmw-S92A6Yp2BVwdwXdDwJJdXIE8qRDrsBn3HPb_z2fIL7w/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      alert("Thank you! Your enquiry has been submitted successfully.");
+
+      form.reset();
+
+    } catch (error) {
+
+      alert("Something went wrong. Please try again.");
+      console.error(error);
+
+    }
+
+  });
+
+}
 
   });
 
