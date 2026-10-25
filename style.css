@@ -1138,3 +1138,7 @@ padding:40px 15px;
 }
 
 }
+/* Homepage Main Heading - Red */
+.hero h1 {
+    color: #A6192E;
+}
